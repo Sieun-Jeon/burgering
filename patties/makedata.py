@@ -1,0 +1,1 @@
+from burgering import Patty

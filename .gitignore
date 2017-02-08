@@ -1,0 +1,7 @@
+*.DS_Store
+*.iml
+*.pyc
+.idea/
+__pycache__/
+Desktop.ini
+Thumbs.db
