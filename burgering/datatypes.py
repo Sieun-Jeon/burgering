@@ -1,34 +1,23 @@
-import pickle
+class Integer:
+    _data = None
 
+    def get(self):
+        return self._data
 
-class Model:
-    prefix = 'm'
+    def set(self, integer):
+        if not type(integer) == int:
+            raise Exception('Input Mismatch')
+
+        self._data = integer
 
 
 class Data:
-    _data = None
-    _file = None
+    #TODO change
+    def get(self):
+        return self._data
 
-    prefix = 'd'
-
-    def save(self, path):
-        pickle.dump(self._data, open(path, "wb"))
-
-    def load(self, path):
-        self._data = pickle.load(open(path, "rb" ))
+    def set(self, integer):
+        if not type(integer) == int:
+            raise Exception('Input Mismatch')
 
 
-class ProcessedData:
-    prefix = 'pd'
-
-
-class TrainingData:
-    prefix = 'dt'
-
-
-class ValidatingData:
-    prefix = 'dv'
-
-
-class Graph:
-    prefix = 'g'
