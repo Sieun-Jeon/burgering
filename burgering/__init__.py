@@ -66,40 +66,38 @@ class Burger:
 
             patty = current_module.patty()
 
-            #코드중복
             if patty.input_type is None:
-                if not len(self.properties_list[i]) == len(patty.properties_format):
+                patty.input_data = None
+            else:  # patty.input_type이 존재한다면
+                input_types = patty.input_type if type(patty.input_type) is tuple else (patty.input_type,)  # input_type이 tuple아닐경우 tuple로 변경
+                inputs = []
+                outputs = [out for out in [outs for outs in self.status]]
+
+                for i_type in input_types:
+                    for output in reversed(outputs):
+                        if output[:output.find('_')] == i_type.prefix:
+                            patty.input_data = output
+                            inputs.append()
+                            break
+
+                if len(inputs) != len(input_types):
                     continue
-                patty.properties = self.properties_list[i]
-                patty.run()
+                if tuple(map(lambda x: type(x), inputs)) != input_types:
+                    continue
 
-                stat = []
-                for output in patty.output_data:
-                    filename = '{}_{}'.format(output.prefix, self._get_id())
-                    output.save(os.path.join(self.path, filename))
+            if not len(self.properties_list[i]) == len(patty.properties_format):
+                return
+            patty.properties = self.properties_list[i]
+            patty.run()
 
-                    stat.append(filename)
+            stat = []
+            for output in patty.output_data:
+                filename = '{}_{}'.format(output.prefix, self._get_id())
+                output.save(os.path.join(self.path, filename))
 
-                self.status[i] = tuple(stat)
-                continue
+                stat.append(filename)
 
-            for outputs in reversed(self.status):
-                for output in outputs:
-                    if output[:output.find('_')] == patty.input_type.prefix:
-                        patty.input_data = patty.input_type
-                        if not len(self.properties_list[i]) == len(patty.properties_format):
-                            continue
-                        patty.properties = self.properties_list[i]
-                        patty.run()
-
-                        stat = []
-                        for output in patty.output_data:
-                            filename = '{}_{}'.format(output.prefix, self._get_id())
-                            output.save(os.path.join(self.path, filename))
-
-                            stat.append((output.prefix, filename))
-
-                        self.status[i] = tuple(stat)
+            self.status[i] = tuple(stat)
 
     def _get_id(self):
         return str(random.randint(0, 10000))

@@ -14,7 +14,7 @@ class LoadFile(Patty):
     author = 'sieunj'
 
     input_type = None
-    output_type = (Data,)
+    output_type = Data
 
     dependencies = ['pandas']
     properties_format = {'delim': str}
