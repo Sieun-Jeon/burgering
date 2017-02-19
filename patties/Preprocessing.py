@@ -108,7 +108,7 @@ class Preprocessing(Patty):
             raise paramMismatch
 
     def select_col(self,data,id_list,axis):
-
+        pass
 
     def burn(self,input_data):
         self.data = input_data

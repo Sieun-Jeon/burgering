@@ -1,5 +1,6 @@
 from importlib import import_module
 from burgering.exceptions import WrongResult
+
 patties_direction = "../patties"
 
 class Patty:
@@ -42,10 +43,12 @@ class Burger:
 
         if self.check_patty(patty_name):
             #Todo add patty
+            pass
         else:
             rslt = self.communicate(None,"패티가 존재하지 않습니다. 패티 마트로 이동할까요?",["Yes","No"])
             if rslt == "Yes":
                 #TODO 패티마트
+                pass
             elif rslt =="No":
                 self.communicate(None,"다른 패티를 추가해주세요",[])
             else:
@@ -56,6 +59,7 @@ class Burger:
 
     def buy_patty(self,patty_name):
         #패티 다운로드
+        pass
 
     def del_patty(self, index):
         self.recipe.pop(index)
