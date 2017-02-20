@@ -14,3 +14,7 @@ class paramMismatch(Exception):
 class WrongResult(Exception):
     def __init__(self,pattyname,err):
         print("ERROR ["+pattyname+"] : result error!") #todo change
+
+class PattyNotExists(Exception):
+    def __init__(self):
+        super(PattyNotExists, self).__init__('Patty not exists!')
