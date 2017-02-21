@@ -96,7 +96,7 @@ class Burger:
         self.recipe.pop(index)
 
         # 삭제된 patty 뒤의 패티들의 data 초기화
-        for p in self.recipe:
+        for p in self.recipe[index:]:
             p.input_data = None
             p.output_data = None
 
