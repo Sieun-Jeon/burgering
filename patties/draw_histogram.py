@@ -1,9 +1,6 @@
 from burgering import Patty
 from burgering.datatypes import Data, Graph
 
-from bokeh.charts import Histogram, output_file, save
-from bokeh.sampledata.autompg import autompg
-
 
 class DrawHistogram(Patty):
     name = 'draw_histogram'
@@ -16,13 +13,27 @@ class DrawHistogram(Patty):
     input_type = (Data,)
     output_type = (Graph,)
 
-    dependencies = ['bokeh']
-    properties_format = {'row_to_draw': str, 'save_path': str}
+    dependencies = ['matplotlib']
+    properties_format = {
+        'row_to_draw': str,
+        'save_path': str,
+        'title': str,
+        'x_label': str,
+        'y_label': str
+    }
 
     def burn(self, data):
+        import matplotlib.pyplot as plt
 
-        self.properties = {'row_to_draw': 'mpg', 'save_path': 'test.html'}
+        plt.hist(data[self.properties['row_to_draw']])
+        plt.title(self.properties['title'])
+        plt.xlabel(self.properties['x_label'])
+        plt.ylabel(self.properties['y_label'])
 
-        p = Histogram(autompg[self.properties['row_to_draw']])
-        output_file(self.properties['save_path'])
-        save(p)
+        plt.savefig(self.properties['save_path'])
+
+        return Graph()
+
+
+
+
